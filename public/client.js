@@ -7,9 +7,12 @@ const usernamePrompt = document.getElementById('usernamePrompt');
 const usernameInput = document.getElementById('usernameInput');
 const usernameBtn = document.getElementById('usernameBtn');
 const chatContainer = document.getElementById('chatContainer');
+const micBtn = document.getElementById('micBtn');
 
 let username = '';
+let recognition;
 
+// Handle username submission
 usernameBtn.addEventListener('click', () => {
   const name = usernameInput.value.trim();
   if (name) {
@@ -20,6 +23,7 @@ usernameBtn.addEventListener('click', () => {
   }
 });
 
+// Handle message form submit
 form.addEventListener('submit', (e) => {
   e.preventDefault();
   if (input.value && username) {
@@ -28,24 +32,32 @@ form.addEventListener('submit', (e) => {
   }
 });
 
+// Receive and render chat messages
 socket.on('chat message', (data) => {
   const item = document.createElement('li');
   item.innerHTML = `<strong>${data.username}:</strong> ${data.message}`;
+
+  if (data.username === username) {
+    item.classList.add('my-message');
+  } else {
+    item.classList.add('other-message');
+  }
+
   messages.appendChild(item);
   window.scrollTo(0, document.body.scrollHeight);
 });
 
+// Notify when a user joins
 socket.on('user joined', (name) => {
   const item = document.createElement('li');
   item.innerHTML = `<em>${name} joined the chat</em>`;
   messages.appendChild(item);
 });
 
-const micBtn = document.getElementById('micBtn');
-let recognition;
-
-if ('webkitSpeechRecognition' in window) {
-  recognition = new webkitSpeechRecognition();
+// Setup speech recognition for mic button
+if ('SpeechRecognition' in window || 'webkitSpeechRecognition' in window) {
+  const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+  recognition = new SpeechRecognition();
   recognition.continuous = false;
   recognition.lang = 'en-US';
   recognition.interimResults = false;
@@ -56,13 +68,14 @@ if ('webkitSpeechRecognition' in window) {
   };
 
   recognition.onerror = (event) => {
-    console.error('Speech recognition error', event.error);
+    console.error('Speech recognition error:', event.error);
   };
 } else {
   micBtn.disabled = true;
-  micBtn.title = "Speech Recognition not supported";
+  micBtn.title = "Speech Recognition not supported in this browser";
 }
 
+// Start speech recognition on mic button click
 micBtn.addEventListener('click', () => {
   if (recognition) recognition.start();
 });

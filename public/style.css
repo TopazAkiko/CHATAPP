@@ -45,23 +45,29 @@ li {
 
 /* Chat bubbles: your messages (right aligned) */
 .my-message {
-  background-color: #DCF8C6; /* light green bubble */
+  background-color: #DCF8C6;
   text-align: right;
   margin-left: 30%;
   border-radius: 15px 15px 0 15px;
   padding: 10px;
+  max-width: 60%;
+  margin-bottom: 5px;
+  word-wrap: break-word;
   list-style: none;
 }
 
-/* Chat bubbles: others' messages (left aligned) */
 .other-message {
-  background-color: #FFFFFF; /* white bubble */
+  background-color: #FFFFFF;
   text-align: left;
   margin-right: 30%;
   border-radius: 15px 15px 15px 0;
   padding: 10px;
+  max-width: 60%;
+  margin-bottom: 5px;
+  word-wrap: break-word;
   list-style: none;
 }
+
 
 form {
   background: #333;
