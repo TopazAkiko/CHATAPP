@@ -27,13 +27,13 @@ function addMessageToList(data) {
   window.scrollTo(0, document.body.scrollHeight);
 }
 
-// Load saved messages from localStorage on page load
-window.onload = () => {
-  const savedMessages = JSON.parse(localStorage.getItem('chatMessages')) || [];
-  savedMessages.forEach((data) => {
+// ✅ Remove localStorage load — use server instead!
+// The server sends saved messages on connect:
+socket.on('load old messages', (oldMessages) => {
+  oldMessages.forEach(data => {
     addMessageToList(data);
   });
-};
+});
 
 // Handle username submission
 usernameBtn.addEventListener('click', () => {
@@ -55,14 +55,9 @@ form.addEventListener('submit', (e) => {
   }
 });
 
-// Receive and render chat messages and save to localStorage
+// Receive and render chat messages (server keeps them)
 socket.on('chat message', (data) => {
   addMessageToList(data);
-
-  // Save to localStorage
-  const savedMessages = JSON.parse(localStorage.getItem('chatMessages')) || [];
-  savedMessages.push(data);
-  localStorage.setItem('chatMessages', JSON.stringify(savedMessages));
 });
 
 // Notify when a user joins

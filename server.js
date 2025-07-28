@@ -1,3 +1,4 @@
+const fs = require('fs');
 const express = require('express');
 const http = require('http');
 const { Server } = require('socket.io');
@@ -6,12 +7,20 @@ const app = express();
 const server = http.createServer(app);
 const io = new Server(server);
 
-// Serve files from 'public'
 app.use(express.static('public'));
 
-// Socket.io logic
+// Load saved messages if messages.json exists
+let messages = [];
+if (fs.existsSync('messages.json')) {
+  messages = JSON.parse(fs.readFileSync('messages.json', 'utf8'));
+}
+
+// Handle socket connections
 io.on('connection', (socket) => {
   console.log('A user connected');
+
+  // Send all saved messages to this new user
+  socket.emit('load old messages', messages);
 
   socket.on('user joined', (username) => {
     socket.username = username;
@@ -20,6 +29,11 @@ io.on('connection', (socket) => {
   });
 
   socket.on('chat message', (data) => {
+    messages.push(data); // Add new message to array
+
+    // Save updated messages array to file
+    fs.writeFileSync('messages.json', JSON.stringify(messages, null, 2));
+
     io.emit('chat message', data);
   });
 
