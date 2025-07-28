@@ -26,6 +26,28 @@ io.on('connection', (socket) => {
     socket.username = username;
     io.emit('user joined', username);
     console.log(`${username} joined`);
+    // Relay WebRTC signaling data
+socket.on('call user', (data) => {
+  io.to(data.userToCall).emit('call made', {
+    signal: data.signalData,
+    from: socket.id,
+    name: data.name,
+  });
+});
+
+socket.on('make answer', (data) => {
+  io.to(data.to).emit('answer made', {
+    signal: data.signal,
+    from: socket.id,
+  });
+});
+
+// File sharing event
+socket.on('send file', (data) => {
+  // Broadcast file data to all except sender
+  socket.broadcast.emit('receive file', data);
+});
+
   });
 
   socket.on('chat message', (data) => {
