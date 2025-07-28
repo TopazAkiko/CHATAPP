@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>ChatApp WhatsApp Style</title>
+  <title>Simple Chat App</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <link rel="stylesheet" href="style.css" />
 </head>
@@ -14,25 +14,12 @@
   </div>
 
   <div id="chatContainer" style="display:none;">
-    <div class="chat-header">Simple WhatsApp Chat</div>
-    <div class="chat-messages" id="messages"></div>
-    <div class="chat-input">
+    <ul id="messages"></ul>
+    <form id="form" action="">
       <input id="input" autocomplete="off" placeholder="Type your message..." />
-      <button id="micBtn" title="Speak">🎤</button>
-      <button id="sendBtn">Send</button>
-    </div>
-    <div class="call-controls">
-  <button id="callBtn">Start Call</button>
-  <button id="hangupBtn">Hang Up</button>
-</div>
-
-<video id="localVideo" autoplay muted style="width: 200px; border: 1px solid #ccc;"></video>
-<video id="remoteVideo" autoplay style="width: 200px; border: 1px solid #ccc;"></video>
-
-<div class="file-upload">
-  <input type="file" id="fileInput" />
-</div>
-
+      <button type="submit">Send</button>
+      <button type="button" id="micBtn" title="Speak message">🎤</button>
+    </form>
   </div>
 
   <script src="/socket.io/socket.io.js"></script>

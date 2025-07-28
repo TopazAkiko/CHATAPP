@@ -1,10 +1,8 @@
 body {
   margin: 0;
+  padding: 0;
   font-family: Arial, sans-serif;
-  background: #ece5dd;
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
+  background: #f5f5f5;
 }
 
 #usernamePrompt {
@@ -12,7 +10,7 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  flex: 1;
+  height: 100vh;
 }
 
 #usernamePrompt input {
@@ -23,76 +21,47 @@ body {
 
 #usernamePrompt button {
   padding: 10px 20px;
-  background: #128C7E;
+  background: #04AA6D;
   color: white;
   border: none;
   cursor: pointer;
 }
 
-#chatContainer {
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 60px 0 60px 0;
+}
+
+li {
+  padding: 8px 16px;
+  border-bottom: 1px solid #ddd;
+}
+
+form {
+  background: #333;
+  padding: 10px;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
   display: flex;
-  flex-direction: column;
-  height: 100vh;
 }
 
-.chat-header {
-  background: #075E54;
-  color: white;
-  padding: 15px;
-  font-weight: bold;
-}
-
-.chat-messages {
-  flex: 1;
-  overflow-y: auto;
-  padding: 20px;
-  display: flex;
-  flex-direction: column;
-}
-
-.my-message {
-  align-self: flex-end;
-  background: #DCF8C6;
-  color: #000;
-  padding: 10px;
-  margin: 5px 0;
-  border-radius: 7.5px 7.5px 0 7.5px;
-  max-width: 60%;
-}
-
-.other-message {
-  align-self: flex-start;
-  background: #FFF;
-  color: #000;
-  padding: 10px;
-  margin: 5px 0;
-  border-radius: 7.5px 7.5px 7.5px 0;
-  max-width: 60%;
-}
-
-.chat-input {
-  display: flex;
-  padding: 10px;
-  background: #f0f0f0;
-}
-
-.chat-input input {
-  flex: 1;
-  padding: 10px;
+form input {
   border: none;
-  border-radius: 20px;
-  margin-right: 10px;
+  padding: 10px;
+  flex: 1;
+  font-size: 16px;
 }
 
-.chat-input button {
-  background: #128C7E;
-  color: white;
+form button {
+  background: #04AA6D;
   border: none;
-  border-radius: 50%;
-  padding: 10px;
+  color: white;
+  padding: 10px 20px;
   cursor: pointer;
 }
 
-.chat-input button:hover {
-  background: #075E54;
+form button:hover {
+  background: #038f5a;
 }
