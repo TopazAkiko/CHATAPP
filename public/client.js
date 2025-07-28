@@ -12,6 +12,10 @@ const micBtn = document.getElementById('micBtn');
 let username = '';
 let recognition;
 
+// Function to add a message to chat list and scroll
+function addMessageTo
+
+
 // Handle username submission
 usernameBtn.addEventListener('click', () => {
   const name = usernameInput.value.trim();
@@ -32,10 +36,16 @@ form.addEventListener('submit', (e) => {
   }
 });
 
-// Receive and render chat messages
 socket.on('chat message', (data) => {
   const item = document.createElement('li');
   item.innerHTML = `<strong>${data.username}:</strong> ${data.message}`;
+
+  if (data.username === username) {
+    item.classList.add('my-message');
+  } else {
+    item.classList.add('other-message');
+  }
+
   messages.appendChild(item);
   window.scrollTo(0, document.body.scrollHeight);
 });

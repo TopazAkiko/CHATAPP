@@ -65,3 +65,54 @@ form button {
 form button:hover {
   background: #038f5a;
 }
+/* Container for messages */
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 60px 10px 60px 10px;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Common message style */
+li {
+  padding: 10px 15px;
+  margin: 8px 0;
+  border-radius: 15px;
+  max-width: 75%;
+  word-wrap: break-word;
+  clear: both;
+}
+
+/* Messages sent by you */
+.my-message {
+  background-color: #04AA6D;
+  color: white;
+  float: right;
+  text-align: right;
+}
+
+/* Messages sent by others */
+.other-message {
+  background-color: #ddd;
+  color: #333;
+  float: left;
+  text-align: left;
+}
+
+/* System messages (like user joined) */
+li em {
+  text-align: center;
+  display: block;
+  color: #666;
+  font-style: italic;
+  clear: both;
+}
+
+/* Clear floats after messages */
+ul::after {
+  content: "";
+  display: block;
+  clear: both;
+}
