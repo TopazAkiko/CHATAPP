@@ -36,6 +36,31 @@ ul {
 li {
   padding: 8px 16px;
   border-bottom: 1px solid #ddd;
+  /* Remove this border for chat bubbles */
+  border-bottom: none;
+  margin-bottom: 5px;
+  word-wrap: break-word;
+  max-width: 60%;
+}
+
+/* Chat bubbles: your messages (right aligned) */
+.my-message {
+  background-color: #DCF8C6; /* light green bubble */
+  text-align: right;
+  margin-left: 30%;
+  border-radius: 15px 15px 0 15px;
+  padding: 10px;
+  list-style: none;
+}
+
+/* Chat bubbles: others' messages (left aligned) */
+.other-message {
+  background-color: #FFFFFF; /* white bubble */
+  text-align: left;
+  margin-right: 30%;
+  border-radius: 15px 15px 15px 0;
+  padding: 10px;
+  list-style: none;
 }
 
 form {
@@ -45,6 +70,7 @@ form {
   bottom: 0;
   width: 100%;
   display: flex;
+  align-items: center;
 }
 
 form input {
@@ -60,8 +86,32 @@ form button {
   color: white;
   padding: 10px 20px;
   cursor: pointer;
+  margin-left: 8px;
+  border-radius: 5px;
+  font-size: 16px;
 }
 
+/* Hover effect for send button */
 form button:hover {
   background: #038f5a;
+}
+
+/* Mic button style */
+#micBtn {
+  cursor: pointer;
+  background-color: #007bff;
+  border: none;
+  color: white;
+  padding: 10px 16px;
+  margin-left: 8px;
+  border-radius: 5px;
+  font-size: 18px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#micBtn:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
 }

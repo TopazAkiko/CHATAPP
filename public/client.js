@@ -40,3 +40,29 @@ socket.on('user joined', (name) => {
   item.innerHTML = `<em>${name} joined the chat</em>`;
   messages.appendChild(item);
 });
+
+const micBtn = document.getElementById('micBtn');
+let recognition;
+
+if ('webkitSpeechRecognition' in window) {
+  recognition = new webkitSpeechRecognition();
+  recognition.continuous = false;
+  recognition.lang = 'en-US';
+  recognition.interimResults = false;
+
+  recognition.onresult = (event) => {
+    const transcript = event.results[0][0].transcript;
+    input.value = transcript;
+  };
+
+  recognition.onerror = (event) => {
+    console.error('Speech recognition error', event.error);
+  };
+} else {
+  micBtn.disabled = true;
+  micBtn.title = "Speech Recognition not supported";
+}
+
+micBtn.addEventListener('click', () => {
+  if (recognition) recognition.start();
+});
