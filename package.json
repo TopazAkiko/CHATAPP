@@ -1,0 +1,21 @@
+{
+  "name": "simple-chat-app",
+  "version": "1.0.0",
+  "description": "A simple real-time web chat app with usernames",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "keywords": [
+    "chat",
+    "socket.io",
+    "express",
+    "node"
+  ],
+  "author": "YOUR_NAME",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2",
+    "socket.io": "^4.7.2"
+  }
+}
